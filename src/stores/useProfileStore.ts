@@ -17,11 +17,25 @@ interface UserInfoData {
 }
 
 interface ProfileState {
-  userInfoData: UserInfoData | null;
+  userInfoData: UserInfoData;
   setUserInfoData: (data: UserInfoData) => void;
 }
 
 export const useUserInfoStore = create<ProfileState>((set) => ({
-  userInfoData: null,
+  userInfoData: {
+    id: 0,
+    nickname: '',
+    description: '',
+    image: '',
+    createdAt: '',
+    updatedAt: '',
+    teamId: '',
+    isFollowing: false,
+    followersCount: 0,
+    followeesCount: 0,
+    reviewCount: 0,
+    averageRating: 0,
+    mostFavoriteCategory: '',
+  },
   setUserInfoData: (data: UserInfoData) => set({ userInfoData: data }),
 }));
