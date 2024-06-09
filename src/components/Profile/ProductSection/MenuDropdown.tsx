@@ -1,15 +1,16 @@
 'use client';
 
-import { Icon } from '@/shared/ui/Icon';
-import { useRef, useState, PropsWithChildren } from 'react';
+import { ProductMenuType } from '@/components/Profile/types/productType';
 import { useClose } from '@/shared/@common/hooks';
 import { Option, SortProps } from '@/shared/ui/Dropdown/Sort';
+import { Icon } from '@/shared/ui/Icon';
+import { PropsWithChildren, useRef, useState } from 'react';
 
 export const MenuDropdown = ({
   children,
   options,
   onSelect,
-}: PropsWithChildren<SortProps>) => {
+}: PropsWithChildren<SortProps<ProductMenuType>>) => {
   const sortClickRef = useRef<HTMLDivElement>(null);
   const [isToggled, setIsToggled] = useState(false);
   const handleToggleSort = (e: React.MouseEvent | React.KeyboardEvent) => {
@@ -17,7 +18,7 @@ export const MenuDropdown = ({
     setIsToggled(!isToggled);
   };
 
-  const handleSelectOption = (option: Option) => {
+  const handleSelectOption = (option: Option<ProductMenuType>) => {
     onSelect(option.value);
     setIsToggled(false);
   };

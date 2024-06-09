@@ -1,18 +1,18 @@
 'use client';
 
-import { Icon } from '@/shared/ui/Icon';
-import { useRef, useState, PropsWithChildren } from 'react';
 import { useClose } from '@/shared/@common/hooks';
+import { Icon } from '@/shared/ui/Icon';
+import { PropsWithChildren, useRef, useState } from 'react';
 
-export interface Option {
-  value: string;
+export interface Option<T = string> {
+  value: T;
   label: string;
 }
 
-export interface SortProps {
-  options: Option[];
-  defaultValue?: string;
-  onSelect: (value: string) => void;
+export interface SortProps<T = string> {
+  options: Option<T>[];
+  defaultValue?: T;
+  onSelect: (value: T) => void;
 }
 
 export const Sort = ({

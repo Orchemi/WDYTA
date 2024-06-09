@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import { MenuDropdown } from '@/components/Profile/ProductSection/MenuDropdown';
 import { ProductList } from '@/components/Profile/ProductSection/ProductList';
-import { ProductMenuType } from '@/components/Profile/types/productType';
 import { PRODUCT_MENU } from '@/components/Profile/constants/PRODUCT_MENU';
 import useProductsQuery from '@/components/Profile/hooks/useProductsQuery';
+import { ProductMenuType } from '@/components/Profile/types/productType';
+import { useState } from 'react';
 
 interface ProductSectionProps {
   currentProfileId: number;
@@ -18,6 +18,7 @@ export const ProductSection = ({ currentProfileId }: ProductSectionProps) => {
   const handleClickTab = (tab: ProductMenuType) => {
     setActiveMenu(tab);
   };
+
   const { productsList, content } = useProductsQuery(
     currentProfileId,
     activeMenu,
@@ -27,14 +28,11 @@ export const ProductSection = ({ currentProfileId }: ProductSectionProps) => {
     <section className="flex flex-col gap-[30px]">
       <div className="!p-0 lg:hidden">
         <MenuDropdown
-          options={[
-            { value: '리뷰 남긴 상품', label: '리뷰 남긴 상품' },
-            { value: '등록한 상품', label: '등록한 상품' },
-            { value: '찜한 상품', label: '찜한 상품' },
-          ]}
-          onSelect={(value: string) => {
-            setActiveMenu(value as ProductMenuType);
-          }}
+          options={PRODUCT_MENU.map((menu) => ({
+            value: menu,
+            label: menu,
+          }))}
+          onSelect={(value) => setActiveMenu(value)}
         >
           {activeMenu}
         </MenuDropdown>
