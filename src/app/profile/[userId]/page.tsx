@@ -11,7 +11,7 @@ interface ProfileProps {
 }
 export default function Profile({ params }: ProfileProps) {
   const { userId } = params;
-  const { loginedId, accessToken } = getUserCookies();
+  const { accessToken } = getUserCookies();
 
   const queryClient = getQueryClient();
 
@@ -26,7 +26,7 @@ export default function Profile({ params }: ProfileProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProfilePageComponent loginedId={Number(loginedId)} />
+      <ProfilePageComponent />
     </HydrationBoundary>
   );
 }

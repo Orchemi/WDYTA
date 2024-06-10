@@ -10,19 +10,19 @@ import { Button, ButtonKind } from '@/shared/ui/Button/Button';
 import { ImageComponent } from '@/shared/ui/Img';
 import { useUserInfoStore } from '@/stores';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-interface ProfileCardProps {
-  loginedId: number;
-}
-
-export const ProfileCard = ({ loginedId }: ProfileCardProps) => {
-  const { accessToken } = useClientCookies();
+export const ProfileCard = () => {
+  const { accessToken, loginedId } = useClientCookies();
   const router = useRouter();
   const { userId } = useParams();
 
-  const currentProfileId = Number(userId) || Number(loginedId);
-  const isMyProfile = Number(userId) === Number(loginedId) || !userId;
+  const currentProfileId = Number(userId) || loginedId;
+  const [isMyProfile, setIsMyProfile] = useState(false);
+
+  useEffect(() => {
+    setIsMyProfile(Number(userId) === loginedId || !userId);
+  }, [loginedId, userId]);
 
   const { data: userInfoData } = useUserInfoSuspenseQuery(
     Number(currentProfileId),

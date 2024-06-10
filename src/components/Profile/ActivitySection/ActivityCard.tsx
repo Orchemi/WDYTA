@@ -4,18 +4,15 @@ import { CategoryChip } from '@/shared/ui/Chip/CategoryChip';
 import { Icon } from '@/shared/ui/Icon';
 // import { useUserInfoStore } from '@/stores';
 import { ActivityCardProps } from '@/components/Profile/types/userActivityType';
+import useClientCookies from '@/shared/@common/hooks/useClientCookies';
 import { useParams } from 'next/navigation';
 import useUserInfoSuspenseQuery from '../hooks/useUserInfoSuspenseQuery';
 
-export const ActivityCard = ({
-  title,
-  icon,
-  loginedId,
-  accessToken,
-}: ActivityCardProps) => {
+export const ActivityCard = ({ title, icon }: ActivityCardProps) => {
   const { userId } = useParams();
+  const { accessToken, loginedId } = useClientCookies();
 
-  const currentProfileId = Number(userId) || Number(loginedId);
+  const currentProfileId = Number(userId) || loginedId;
 
   const { data: currentUserInfo } = useUserInfoSuspenseQuery(
     currentProfileId,

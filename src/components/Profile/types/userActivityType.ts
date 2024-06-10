@@ -5,6 +5,4 @@ export type ActivityData = Omit<ActivityCardProps, 'accessToken'>;
 export interface ActivityCardProps {
   title: string;
   icon?: IconType;
-  loginedId?: string;
-  accessToken: string;
 }

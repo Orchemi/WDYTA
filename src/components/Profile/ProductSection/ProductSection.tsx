@@ -1,20 +1,18 @@
 'use client';
 
-import { useState } from 'react';
 import { MenuDropdown } from '@/components/Profile/ProductSection/MenuDropdown';
 import { ProductList } from '@/components/Profile/ProductSection/ProductList';
-import { ProductMenuType } from '@/components/Profile/types/productType';
 import { PRODUCT_MENU } from '@/components/Profile/constants/productMenu';
 import useProductsQuery from '@/components/Profile/hooks/useProductsQuery';
+import { ProductMenuType } from '@/components/Profile/types/productType';
+import useClientCookies from '@/shared/@common/hooks/useClientCookies';
 import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
-interface ProductSectionProps {
-  loginedId: number;
-}
-
-export const ProductSection = ({ loginedId }: ProductSectionProps) => {
+export const ProductSection = () => {
+  const { loginedId } = useClientCookies();
   const { userId } = useParams();
-  const currentProfileId = Number(userId) || Number(loginedId);
+  const currentProfileId = Number(userId) || loginedId;
 
   const [activeMenu, setActiveMenu] =
     useState<ProductMenuType>('리뷰 남긴 상품');
