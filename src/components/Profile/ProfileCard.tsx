@@ -4,6 +4,7 @@ import { PROFILE_DEFAULT_IMAGE } from '@/components/Profile/constants/profileDef
 import useFollowMutation from '@/components/Profile/hooks/useFollowMutation';
 import useUnFollowMutation from '@/components/Profile/hooks/useUnFollowMutation';
 import useUserInfoSuspenseQuery from '@/components/Profile/hooks/useUserInfoSuspenseQuery';
+import useClientCookies from '@/shared/@common/hooks/useClientCookies';
 import { logoutAction } from '@/shared/@common/utils';
 import { Button, ButtonKind } from '@/shared/ui/Button/Button';
 import { ImageComponent } from '@/shared/ui/Img';
@@ -13,10 +14,10 @@ import { useEffect } from 'react';
 
 interface ProfileCardProps {
   loginedId: number;
-  accessToken: string;
 }
 
-export const ProfileCard = ({ loginedId, accessToken }: ProfileCardProps) => {
+export const ProfileCard = ({ loginedId }: ProfileCardProps) => {
+  const { accessToken } = useClientCookies();
   const router = useRouter();
   const { userId } = useParams();
 

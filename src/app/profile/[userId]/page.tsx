@@ -26,10 +26,7 @@ export default function Profile({ params }: ProfileProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <ProfilePageComponent
-        accessToken={accessToken}
-        loginedId={Number(loginedId)}
-      />
+      <ProfilePageComponent loginedId={Number(loginedId)} />
     </HydrationBoundary>
   );
 }
