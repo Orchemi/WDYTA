@@ -1,16 +1,18 @@
-import { Icon } from '@/shared/ui/Icon';
-import { useRef, useState, PropsWithChildren } from 'react';
-import { useClose } from '@/shared/@common/hooks';
+'use client';
 
-export interface Option {
-  value: string;
+import { useClose } from '@/shared/@common/hooks';
+import { Icon } from '@/shared/ui/Icon';
+import { PropsWithChildren, useRef, useState } from 'react';
+
+export interface Option<T = string> {
+  value: T;
   label: string;
 }
 
-export interface SortProps {
-  options: Option[];
-  defaultValue?: string;
-  onSelect: (value: string) => void;
+export interface SortProps<T = string> {
+  options: Option<T>[];
+  defaultValue?: T;
+  onSelect: (value: T) => void;
 }
 
 export const Sort = ({
@@ -67,7 +69,7 @@ export const Sort = ({
         </div>
       </div>
       {isToggled && (
-        <div className="absolute z-20 top-[100%] flex w-[160px] md:w-[140px] p-[10px] flex-col items-start gap-[5px] rounded-lg border border-solid border-gray-35 bg-black-25">
+        <div className="absolute z-20 top-[calc(100%+10px)] flex w-[160px] md:w-[140px] p-[10px] flex-col items-start gap-[5px] rounded-lg border border-solid border-gray-35 bg-black-25">
           {options.map((option) => (
             <div
               role="button"
