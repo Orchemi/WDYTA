@@ -1,3 +1,4 @@
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { API_PRODUCT } from './constants/API';
 
 interface ProductProps {
@@ -17,7 +18,8 @@ export const getProductList = () => {
  * 상품 생성
  * @param data: categoryId(카테고리 Id), image(상품 이미지), description(상품 설명), name(상품 이름)
  */
-export const postCreateProduct = (data: ProductProps, accessToken: string) => {
+export const postCreateProduct = (data: ProductProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.PRODUCT, {
     method: 'POST',
     headers: {
@@ -32,7 +34,8 @@ export const postCreateProduct = (data: ProductProps, accessToken: string) => {
  * 상세 상품 조회
  * @param productId: 상품 Id
  */
-export const getDetailProduct = (productId: number, accessToken: string) => {
+export const getDetailProduct = (productId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.BY_ID(productId), {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -45,11 +48,8 @@ export const getDetailProduct = (productId: number, accessToken: string) => {
  * @param productId : 상품 Id
  * @param data: categoryId(카테고리 Id), image(상품 이미지), description(상품 설명), name(상품 이름)
  */
-export const patchProduct = (
-  productId: number,
-  data: ProductProps,
-  accessToken: string,
-) => {
+export const patchProduct = (productId: number, data: ProductProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.BY_ID(productId), {
     method: 'PATCH',
     headers: {
@@ -65,10 +65,8 @@ export const patchProduct = (
  * @param productId : 상품 Id
  */
 
-export const getProductReviewList = (
-  productId: number,
-  accessToken: string,
-) => {
+export const getProductReviewList = (productId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.REVIEWS(productId), {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -81,7 +79,8 @@ export const getProductReviewList = (
  * @param productId : 상품 Id
  */
 
-export const postFavoriteProduct = (productId: number, accessToken: string) => {
+export const postFavoriteProduct = (productId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.FAVORITE(productId), {
     method: 'POST',
     headers: {
@@ -95,10 +94,8 @@ export const postFavoriteProduct = (productId: number, accessToken: string) => {
  * @param productId : 상품 Id
  */
 
-export const deleteFavoriteProduct = (
-  productId: number,
-  accessToken: string,
-) => {
+export const deleteFavoriteProduct = (productId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_PRODUCT.FAVORITE(productId), {
     method: 'DELETE',
     headers: {

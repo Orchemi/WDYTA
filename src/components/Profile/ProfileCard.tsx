@@ -4,8 +4,8 @@ import { PROFILE_DEFAULT_IMAGE } from '@/components/Profile/constants/profileDef
 import useFollowMutation from '@/components/Profile/hooks/useFollowMutation';
 import useUnFollowMutation from '@/components/Profile/hooks/useUnFollowMutation';
 import useUserInfoSuspenseQuery from '@/components/Profile/hooks/useUserInfoSuspenseQuery';
-import useClientCookies from '@/shared/@common/hooks/useClientCookies';
 import { logoutAction } from '@/shared/@common/utils';
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { Button, ButtonKind } from '@/shared/ui/Button/Button';
 import { ImageComponent } from '@/shared/ui/Img';
 import { useUserInfoStore } from '@/stores';
@@ -13,7 +13,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export const ProfileCard = () => {
-  const { accessToken, loginedId } = useClientCookies();
+  const { loginedId } = getClientCookies();
   const router = useRouter();
   const { userId } = useParams();
 
@@ -26,7 +26,6 @@ export const ProfileCard = () => {
 
   const { data: userInfoData } = useUserInfoSuspenseQuery(
     Number(currentProfileId),
-    accessToken,
   );
   const {
     image,
@@ -52,10 +51,10 @@ export const ProfileCard = () => {
   const followBtnText = isFollowing ? '팔로우 취소' : '팔로우';
 
   const handleClickFollow = () => {
-    responseFollowMutate({ currentProfileId, accessToken });
+    responseFollowMutate({ currentProfileId });
   };
   const handleClickUnFollow = () => {
-    responseUnFollowMutate({ currentProfileId, accessToken });
+    responseUnFollowMutate({ currentProfileId });
   };
   const handleSignOut = async () => {
     await logoutAction();

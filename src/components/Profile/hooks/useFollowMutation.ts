@@ -4,19 +4,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export interface FollowMutationProps {
   currentProfileId: number;
-  accessToken: string;
 }
 const useFollowMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({
-      currentProfileId,
-      accessToken,
-    }: FollowMutationProps) => {
-      const response = await postUserFollow(
-        { userId: currentProfileId },
-        accessToken,
-      );
+    mutationFn: async ({ currentProfileId }: FollowMutationProps) => {
+      const response = await postUserFollow({ userId: currentProfileId });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);

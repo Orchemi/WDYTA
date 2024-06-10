@@ -1,3 +1,4 @@
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { API_USERS } from './constants/API';
 
 interface PatchMyInfoProps {
@@ -9,7 +10,8 @@ interface PatchMyInfoProps {
 /**
  * 내 정보 조회
  */
-export const getMyInfo = (accessToken: string) => {
+export const getMyInfo = () => {
+  const { accessToken } = getClientCookies();
   return fetch(API_USERS.MY_INFO, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
@@ -21,7 +23,8 @@ export const getMyInfo = (accessToken: string) => {
  * 내 정보 수정
  * @param data 내 정보 수정 폼의 데이터
  */
-export const patchMyInfo = (data: PatchMyInfoProps, accessToken: string) => {
+export const patchMyInfo = (data: PatchMyInfoProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_USERS.MY_INFO, {
     method: 'PATCH',
     headers: {
@@ -42,7 +45,8 @@ export const getUserRanking = () => {
 /**
  * 유저 정보 조회
  */
-export const getUserInfo = (userId: number, accessToken: string) => {
+export const getUserInfo = (userId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_USERS.BY_ID(userId), {
     headers: {
       Authorization: `Bearer ${accessToken}`,

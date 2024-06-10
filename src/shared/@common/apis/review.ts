@@ -1,3 +1,4 @@
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { API_REVIEWS } from './constants/API';
 
 interface PostReviewProps {
@@ -21,7 +22,8 @@ interface PatchReviewProps {
 /**
  * 리뷰 좋아요
  */
-export const postLike = (reviewId: number, accessToken: string) => {
+export const postLike = (reviewId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_REVIEWS.LIKE(reviewId), {
     method: 'POST',
     headers: {
@@ -33,7 +35,8 @@ export const postLike = (reviewId: number, accessToken: string) => {
 /**
  * 리뷰 좋아요 취소
  */
-export const deleteLike = (reviewId: number, accessToken: string) => {
+export const deleteLike = (reviewId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_REVIEWS.LIKE(reviewId), {
     method: 'DELETE',
     headers: {
@@ -46,7 +49,8 @@ export const deleteLike = (reviewId: number, accessToken: string) => {
  * 리뷰 생성
  * @param data 리뷰 생성 모달의 폼 데이터
  */
-export const postReview = (data: PostReviewProps, accessToken: string) => {
+export const postReview = (data: PostReviewProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_REVIEWS.CREATE, {
     method: 'POST',
     headers: {
@@ -60,7 +64,8 @@ export const postReview = (data: PostReviewProps, accessToken: string) => {
 /**
  * 리뷰 삭제
  */
-export const deleteReview = (reviewId: number, accessToken: string) => {
+export const deleteReview = (reviewId: number) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_REVIEWS.BY_ID(reviewId), {
     method: 'DELETE',
     headers: {
@@ -73,11 +78,8 @@ export const deleteReview = (reviewId: number, accessToken: string) => {
  * 리뷰 수정
  * @param data 리뷰 수정 모달의 폼 데이터
  */
-export const patchReview = (
-  reviewId: number,
-  data: PatchReviewProps,
-  accessToken: string,
-) => {
+export const patchReview = (reviewId: number, data: PatchReviewProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_REVIEWS.BY_ID(reviewId), {
     method: 'PATCH',
     headers: {

@@ -6,14 +6,8 @@ import { FollowMutationProps } from './useFollowMutation';
 const useUnFollowMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({
-      currentProfileId,
-      accessToken,
-    }: FollowMutationProps) => {
-      const response = await deleteUserFollow(
-        { userId: currentProfileId },
-        accessToken,
-      );
+    mutationFn: async ({ currentProfileId }: FollowMutationProps) => {
+      const response = await deleteUserFollow({ userId: currentProfileId });
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.message);

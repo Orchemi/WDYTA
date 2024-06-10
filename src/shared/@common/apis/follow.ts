@@ -1,3 +1,4 @@
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { API_FOLLOW } from './constants/API';
 
 interface UserFollowProps {
@@ -6,7 +7,8 @@ interface UserFollowProps {
 /**
  * 유저 팔로우
  */
-export const postUserFollow = (data: UserFollowProps, accessToken: string) => {
+export const postUserFollow = (data: UserFollowProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_FOLLOW.FOLLOW, {
     method: 'POST',
     headers: {
@@ -20,10 +22,8 @@ export const postUserFollow = (data: UserFollowProps, accessToken: string) => {
 /**
  * 유저 언팔로우
  */
-export const deleteUserFollow = (
-  data: UserFollowProps,
-  accessToken: string,
-) => {
+export const deleteUserFollow = (data: UserFollowProps) => {
+  const { accessToken } = getClientCookies();
   return fetch(API_FOLLOW.FOLLOW, {
     method: 'DELETE',
     headers: {

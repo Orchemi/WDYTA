@@ -5,12 +5,12 @@ import { ProductList } from '@/components/Profile/ProductSection/ProductList';
 import { PRODUCT_MENU } from '@/components/Profile/constants/productMenu';
 import useProductsQuery from '@/components/Profile/hooks/useProductsQuery';
 import { ProductMenuType } from '@/components/Profile/types/productType';
-import useClientCookies from '@/shared/@common/hooks/useClientCookies';
+import getClientCookies from '@/shared/@common/utils/getClientCookies';
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 export const ProductSection = () => {
-  const { loginedId } = useClientCookies();
+  const { loginedId } = getClientCookies();
   const { userId } = useParams();
   const currentProfileId = Number(userId) || loginedId;
 
