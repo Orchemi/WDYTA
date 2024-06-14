@@ -1,19 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 import { MenuDropdown } from '@/components/Profile/ProductSection/MenuDropdown';
 import { ProductList } from '@/components/Profile/ProductSection/ProductList';
-import { ProductMenuType } from '@/components/Profile/types/productType';
 import { TAB_OPTIONS } from '@/components/Profile/constants/productMenu';
 import useProductsQuery from '@/components/Profile/hooks/useProductsQuery';
+import { ProductMenuType } from '@/components/Profile/types/productType';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-const TAB_NAMES = {
-  '리뷰 남긴 상품': 'reviewedProduct',
-  '등록한 상품': 'createdProduct',
-  '찜한 상품': 'favoriteProduct',
-};
+import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
 export const ProductSection = ({ loginedId }: { loginedId: number }) => {
   const router = useRouter();

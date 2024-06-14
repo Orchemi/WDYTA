@@ -42,12 +42,8 @@ export const getUserRanking = () => {
 /**
  * 유저 정보 조회
  */
-export const getUserInfo = (userId: number, accessToken: string) => {
-  return fetch(API_USERS.BY_ID(userId), {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  });
+export const getUserInfo = (userId: number) => {
+  return fetch(API_USERS.BY_ID(userId));
 };
 
 /**

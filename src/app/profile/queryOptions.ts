@@ -1,6 +1,6 @@
-import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
-import { getMyInfo, getUserInfo } from '@/shared/@common/apis';
 import { ProductDataPage } from '@/components/Profile/types/productType';
+import { getMyInfo, getUserInfo } from '@/shared/@common/apis';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { ProfileKeys } from './queryKeyFactories';
 
 export const productOptions = (
@@ -19,11 +19,11 @@ export const productOptions = (
   });
 };
 
-export const profileOptions = (userId: number, accessToken: string) => {
+export const profileOptions = (userId: number) => {
   return queryOptions({
     queryKey: ProfileKeys.user(Number(userId)),
     queryFn: async () => {
-      const response = await getUserInfo(Number(userId), accessToken);
+      const response = await getUserInfo(Number(userId));
       return response.json();
     },
   });
