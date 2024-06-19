@@ -1,12 +1,12 @@
-import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
-import {
-  getProductListByOrder,
-  getHomeProductList,
-} from '@/shared/@common/apis/product';
-import { getUserRanking } from '@/shared/@common/apis';
-import { notFound } from 'next/navigation';
 import { Product, ProductsDataPage } from '@/components/Home/types/ProductType';
 import { Ranking } from '@/components/Home/types/RankingType';
+import { getUserRanking } from '@/shared/@common/apis';
+import {
+  getHomeProductList,
+  getProductListByOrder,
+} from '@/shared/@common/apis/product';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
+import { notFound } from 'next/navigation';
 import { homeProductKeys, homeRankingKeys } from './homeQueryKeyFactories';
 
 // page.tsx에서 핫한 상품 목록 요청을 위한 옵션
@@ -23,6 +23,7 @@ export const hotProductOptions = () => {
       const hotProductsData = await response.json();
       return hotProductsData.list;
     },
+    staleTime: 0,
     // staleTime: 0.5 * 60 * 1000, // 데이터가 30초 동안 fresh 상태로 유지됨
     // refetchInterval: 30000, // 30초마다 데이터를 자동으로 가져옴
   });
