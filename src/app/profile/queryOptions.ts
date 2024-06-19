@@ -1,12 +1,12 @@
-import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
+import { FollowDataPage } from '@/components/Profile/types/followType';
+import { ProductDataPage } from '@/components/Profile/types/productType';
 import {
   getMyInfo,
   getUserFollowees,
   getUserFollowers,
   getUserInfo,
 } from '@/shared/@common/apis';
-import { ProductDataPage } from '@/components/Profile/types/productType';
-import { FollowDataPage } from '@/components/Profile/types/followType';
+import { infiniteQueryOptions, queryOptions } from '@tanstack/react-query';
 import { ProfileKeys } from './queryKeyFactories';
 
 export const productOptions = (
@@ -20,6 +20,7 @@ export const productOptions = (
       const response = await apiFunc(currentProfileId, pageParam);
       return response.json();
     },
+    staleTime: 0,
     initialPageParam: 0,
     getNextPageParam: (lastPage) => lastPage.nextCursor,
   });
