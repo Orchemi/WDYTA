@@ -1,39 +1,39 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        remotePatterns: [
-            {
-                protocol: "https",
-                hostname: "sprint-fe-project.s3.ap-northeast-2.amazonaws.com",
-            },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'sprint-fe-project.s3.ap-northeast-2.amazonaws.com',
+      },
+    ],
+    deviceSizes: [320, 1024],
+    imageSizes: [16, 64],
+  },
+  webpack(config) {
+    const fileLoaderRule = config.module.rules.find((rule) =>
+      rule.test?.test?.('.svg'),
+    );
 
-        ],
-    },
-    webpack(config) {
+    config.module.rules.push(
+      {
+        ...fileLoaderRule,
+        test: /\.svg$/i,
+        resourceQuery: /url/,
+      },
 
-        const fileLoaderRule = config.module.rules.find((rule) =>
-            rule.test?.test?.('.svg'),
-        )
+      {
+        test: /\.svg$/i,
+        issuer: fileLoaderRule.issuer,
+        resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
+        use: ['@svgr/webpack'],
+      },
+    );
 
-        config.module.rules.push(
-            {
-                ...fileLoaderRule,
-                test: /\.svg$/i,
-                resourceQuery: /url/,
-            },
+    fileLoaderRule.exclude = /\.svg$/i;
 
-            {
-                test: /\.svg$/i,
-                issuer: fileLoaderRule.issuer,
-                resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
-                use: ['@svgr/webpack'],
-            },
-        )
-
-        fileLoaderRule.exclude = /\.svg$/i
-
-        return config
-    },
+    return config;
+  },
 };
 
 export default nextConfig;
